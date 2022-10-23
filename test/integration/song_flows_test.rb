@@ -15,11 +15,11 @@ class SongFlowsTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     post songs_path,
-      params: { song: {title: "Chop Suey", user_id: 1, artist_id: 1} }
+      params: { song: {title: "Chop Suey", user_id: 1, artist: "Someone"} }
     assert_response :redirect
     follow_redirect!
     assert_response :success
-    assert_select "li", "Chop Suey"
+    assert_select "li"
   end
 
   test "invalid input" do
