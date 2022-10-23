@@ -6,7 +6,7 @@
   <% @songs.each do |song| %>
     <%= turbo_frame_tag song do %>
       <li>
-        <%= song.title %> - 
+        <%= "#{song.title} - #{song.artist}" %> --- 
         <%= link_to "delete", song_path(song.id), data: {turbo_method: :delete} %> -
         <%= link_to "edit", edit_song_path(song.id) %>
       </li> 
@@ -15,3 +15,4 @@
 </ul>
 
 <%= link_to "New Song", new_song_path %>
+<%= link_to "logout", destroy_user_session_path, data: {turbo_method: :delete} %>
