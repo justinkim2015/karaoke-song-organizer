@@ -1,0 +1,10 @@
+<h1>Songs:</h1>
+
+<p>Hello, <%= current_user.email %></p>
+<br>
+<p>Here are your songs:</p>
+<ul>
+  <% @songs.each do |song| %>
+    <li><%= song.title %></li>
+  <% end %>
+</ul>
