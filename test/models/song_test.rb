@@ -8,4 +8,8 @@ class SongTest < ActiveSupport::TestCase
   test 'Can see user' do
     assert @song.user
   end
+
+  test 'Can see artist' do
+    assert @song.artist
+  end
 end

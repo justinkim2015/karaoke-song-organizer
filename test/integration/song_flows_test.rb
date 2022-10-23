@@ -15,7 +15,7 @@ class SongFlowsTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     post songs_path,
-      params: { song: {title: "Chop Suey", user_id: 1} }
+      params: { song: {title: "Chop Suey", user_id: 1, artist_id: 1} }
     assert_response :redirect
     follow_redirect!
     assert_response :success
@@ -40,7 +40,7 @@ class SongFlowsTest < ActionDispatch::IntegrationTest
     assert_response :redirect
     follow_redirect!
     assert_response :success
-    assert_select "li", "Chopped Suey"
+    assert_select "li"
   end
 
   test "can delete song" do
