@@ -27,7 +27,7 @@ class SongFlowsTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     post songs_path,
-      params: { song: {title: "Chop Suey", user_id: 2} }
+      params: { song: {title: ""} }
     assert_response :unprocessable_entity
   end
 
@@ -41,5 +41,13 @@ class SongFlowsTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_response :success
     assert_select "li", "Chopped Suey"
+  end
+
+  test "can delete song" do
+    get "/"
+    assert_response :success
+
+    delete song_path(@song.id)
+    assert_response :redirect
   end
 end
