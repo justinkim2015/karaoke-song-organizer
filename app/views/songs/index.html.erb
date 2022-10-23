@@ -1,14 +1,17 @@
 <h1>Songs:</h1>
 
 <p>Hello, <%= current_user.email %></p>
-<br>
 <p>Here are your songs:</p>
 <ul>
   <% @songs.each do |song| %>
-    <li><%= song.title %></li>
+    <%= turbo_frame_tag song do %>
+      <li>
+        <%= song.title %> - 
+        <%= link_to "delete", song_path(song.id), data: {turbo_method: :delete} %> -
+        <%= link_to "edit", edit_song_path(song.id) %>
+      </li> 
+    <% end %>
   <% end %>
 </ul>
 
-<%= turbo_frame_tag "new" do %>
-  <%= link_to "New Song", new_song_path %>
-<% end %>
+<%= link_to "New Song", new_song_path %>
