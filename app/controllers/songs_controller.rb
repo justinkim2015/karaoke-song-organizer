@@ -4,15 +4,30 @@ class SongsController < ApplicationController
   end
 
   def new
+    @song = Song.new
   end
 
   def create
-    @song = Song.new(song_params)
+    @song = current_user.songs.build(song_params)
 
     if @song.save
       redirect_to root_path
     else
       render :new, status: :unprocessable_entity
+    end
+  end
+
+  def edit
+    @song = Song.find(params[:id])
+  end
+
+  def update
+    @song = Song.find(params[:id])
+
+    if @song.update(song_params)
+      redirect_to root_path
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 

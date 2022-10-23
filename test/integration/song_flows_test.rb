@@ -6,6 +6,8 @@ class SongFlowsTest < ActionDispatch::IntegrationTest
   def setup
     sign_in users(:one)
     Rails.application.load_seed
+
+    @song = Song.first
   end
 
   test "Can write new song" do
@@ -30,5 +32,14 @@ class SongFlowsTest < ActionDispatch::IntegrationTest
   end
 
   test "Can edit song" do
+    get edit_song_path(@song.id)
+    assert_response :success
+
+    patch song_path(@song.id),
+      params: { song: {title: "Chopped Suey", user_id: 1} }
+    assert_response :redirect
+    follow_redirect!
+    assert_response :success
+    assert_select "li", "Chopped Suey"
   end
 end

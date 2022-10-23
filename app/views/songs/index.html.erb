@@ -8,3 +8,7 @@
     <li><%= song.title %></li>
   <% end %>
 </ul>
+
+<%= turbo_frame_tag "new" do %>
+  <%= link_to "New Song", new_song_path %>
+<% end %>
