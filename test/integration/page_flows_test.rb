@@ -11,5 +11,6 @@ class PageFlowsTest < ActionDispatch::IntegrationTest
   test "Can see song#index" do
     get '/'
     assert_response :success
+    assert_select "h1", "Songs:"
   end
 end
