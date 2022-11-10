@@ -1,0 +1,5 @@
+<header class="flex justify-around align-center bg-slate-300 py-3">
+  <h1 class="text-xl"><%= link_to "Karaoke Song Organizer", root_path %></h1>
+  <%= link_to "logout", destroy_user_session_path, data: {turbo_method: :delete}, class: "link-primary" %>
+</header>
+

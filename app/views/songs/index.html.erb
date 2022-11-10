@@ -1,23 +1,21 @@
-<header class="flex bg-slate-300">
-  <h1 class="text-xl">Karaoke Song Organizer</h1>
-  <%= link_to "logout", destroy_user_session_path, data: {turbo_method: :delete}, class: "link-primary" %>
-</header>
+<%= render "shared/navbar" %>
 
 <h1 class="text-xl m-3">Hello, <%= current_user.email %>,</h1>
 
 <ul class="m-3">
   <p>Here are your songs:</p>
-  <div class="border">
+  <div class="border p-1">
     <% @songs.each do |song| %>
       <%= turbo_frame_tag song do %>
-        <li>
-          <%= "#{song.title} - #{song.artist}" %> ---
-          <%= link_to "delete", song_path(song.id), data: {turbo_method: :delete} %> -
+        <li class="my-2">
+          <b><%=link_to song.title, song_path(song.id), data: {turbo_frame: '_top'} %></b> by 
+          <b><%= song.artist %></b> --
+          <%= link_to "delete", song_path(song.id), data: {turbo_method: :delete} %> /
           <%= link_to "edit", edit_song_path(song.id) %>
         </li>
       <% end %>
-    <%= link_to "New Song", new_song_path %>
     <% end %>
+    <%= link_to "New Song", new_song_path, class: "" %>
   </div>
 </ul>
 

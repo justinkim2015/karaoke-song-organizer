@@ -1,7 +1,14 @@
-<%= form_with model: song do |f| %>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
-  <%= f.label :artist %>
-  <%= f.text_field :artist %>
-  <%= f.submit %>
+<%= form_with model: song, class: "border m-3 p-3 flex flex-col" do |f| %>
+
+    <div class="flex justify-around">
+      <%= f.label :title, class: "" %>
+      <%= f.text_field :title, class: "border" %>
+    </div>
+
+    <div class="flex justify-around my-1">
+      <%= f.label :artist, class: "" %>
+      <%= f.text_field :artist, class: "border" %>
+    </div>
+    
+    <%= f.submit "Save", class: "border" %>
 <% end %>
