@@ -74,3 +74,5 @@ end
 gem 'devise'
 
 gem 'cssbundling-rails'
+
+gem 'figaro'
