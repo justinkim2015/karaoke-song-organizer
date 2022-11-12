@@ -72,7 +72,7 @@ group :test do
 end
 
 gem 'devise'
-
 gem 'cssbundling-rails'
-
 gem 'figaro'
+gem 'omniauth-genius'
+gem 'httparty', '~> 0.20.0'

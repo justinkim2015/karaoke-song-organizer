@@ -19,3 +19,25 @@
   </div>
 </ul>
 
+<%= form_with url: root_path, method: :get, class: "border m-3 p-3 flex flex-col" do |f| %>
+    <%= f.label :input, 'What song or artist?' %>
+    <%= f.text_field :input, class: "border" %>
+
+    <%= f.submit "Search", class: "border" %>
+<% end %>
+
+
+<ul class='m-3 p-3'>
+  <% @result[:response][:hits].each do |hit| %>
+    <li class='flex'>
+      <%= hit[:result][:full_title] %>
+      <%#= image_tag(hit[:result][:header_image_thumbnail_url])  %>
+
+      <%= form_with model: @song do |f| %>
+          <%= f.hidden_field :title, value: hit[:result][:title] %>
+          <%= f.hidden_field :artist, value: hit[:result][:artist_names] %>
+          <%= f.submit "Add Song", class: "border p-1" %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
