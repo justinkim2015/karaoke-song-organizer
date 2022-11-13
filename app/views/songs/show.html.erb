@@ -1,1 +1,13 @@
 <%= @song.title %> -- <%= @song.artist %>
+<%= image_tag @song.image_url %>
+<br>
+<br>
+
+
+<% @lyrics.each do |lyric| %>
+  <li><%= lyric.text %></li>
+<% end %>
+<br>
+-------------
+<br>
+<%= @lyrics.text %>

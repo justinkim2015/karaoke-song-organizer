@@ -15,6 +15,10 @@ class SongsController < ApplicationController
   end
 
   def show
+    test = HTTParty.get(@song.lyrics_url)
+    html = test.body
+    nokogiri = Nokogiri::HTML(html)
+    @lyrics = nokogiri.xpath("//div[contains(@class, 'Lyrics__Container')]")
   end
 
   def create
@@ -46,7 +50,7 @@ class SongsController < ApplicationController
   private
 
   def song_params
-    params.require(:song).permit(:artist, :title)
+    params.require(:song).permit(:artist, :title, :genius_id, :lyrics_url, :image_url)
   end
 
   def set_song

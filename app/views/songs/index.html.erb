@@ -34,10 +34,15 @@
       <%#= image_tag(hit[:result][:header_image_thumbnail_url])  %>
 
       <%= form_with model: @song do |f| %>
+          <%= f.hidden_field :image_url, value: hit[:result][:song_art_image_thumbnail_url] %>
+          <%= f.hidden_field :lyrics_url, value: hit[:result][:url] %>
           <%= f.hidden_field :title, value: hit[:result][:title] %>
           <%= f.hidden_field :artist, value: hit[:result][:artist_names] %>
+          <%= f.hidden_field :genius_id, value: hit[:result][:id] %>
           <%= f.submit "Add Song", class: "border p-1" %>
       <% end %>
     </li>
+
   <% end %>
+
 </ul>

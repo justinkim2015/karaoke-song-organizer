@@ -274,6 +274,7 @@ DEPENDENCIES
   httparty (~> 0.20.0)
   importmap-rails
   jbuilder
+  nokogiri
   omniauth-genius
   pg (~> 1.1)
   puma (~> 5.0)
