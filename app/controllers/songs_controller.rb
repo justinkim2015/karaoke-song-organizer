@@ -17,8 +17,14 @@ class SongsController < ApplicationController
   def show
     test = HTTParty.get(@song.lyrics_url)
     html = test.body
-    nokogiri = Nokogiri::HTML(html)
-    @lyrics = nokogiri.xpath("//div[contains(@class, 'Lyrics__Container')]")
+
+    doc = Nokogiri::HTML("<div>Hello<br>World</div>")
+    doc.css('br').each{ |br| br.replace("\n") }
+    @docs = doc.at('div')
+
+    document = Nokogiri::HTML(html)
+    spaced = document.css('br').each{ |br| br.replace("\n") }
+    @lyrics = spaced.xpath("//div[contains(@class, 'Lyrics__Container')]")
   end
 
   def create

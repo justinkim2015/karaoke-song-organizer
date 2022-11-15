@@ -1,13 +1,10 @@
-<%= @song.title %> -- <%= @song.artist %>
-<%= image_tag @song.image_url %>
-<br>
-<br>
+<%= render "shared/navbar" %>
 
-
-<% @lyrics.each do |lyric| %>
-  <li><%= lyric.text %></li>
-<% end %>
-<br>
--------------
-<br>
-<%= @lyrics.text %>
+<div class="flex flex-col">
+  <h1 class='text-xl'><%= link_to @song.title, @song.lyrics_url %> - <%= @song.artist %></h1>
+  <%#= image_tag @song.image_url %>
+  <br>
+  <br>
+  
+  <div class="border"><%= simple_format(@lyrics.text, class: 'm-2 p-2') %></div>
+</div>
