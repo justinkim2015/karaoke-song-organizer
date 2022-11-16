@@ -1,32 +1,33 @@
 <%= render "shared/navbar" %>
 
-<h1 class="text-xl m-3">Hello, <%= current_user.first_name %>,</h1>
+<h1 class="text-xl m-3">Hello <%= current_user.first_name %>,</h1>
 
 <ul class="m-3">
   <p>Here are your songs:</p>
   <div class="border p-1">
-    <% unless @songs.nil? %>
-      <% @songs.each do |song| %>
-        <%= turbo_frame_tag song do %>
-          <li class="my-2">
-            <b><%=link_to song.title, song_path(song.id), data: {turbo_frame: '_top'} %></b> by 
-            <b><%= song.artist %></b> --
-            <%= link_to "delete", song_path(song.id), data: {turbo_method: :delete} %> /
-            <%= link_to "edit", edit_song_path(song.id) %>
-          </li>
-        <% end %>
+    <% @songs.each do |song| %>
+      <%= turbo_frame_tag song do %>
+        <li class="my-2">
+          <b><%=link_to song.title, song_path(song.id), data: {turbo_frame: '_top'} %></b> by 
+          <b><%= song.artist %></b> --
+          <%= link_to "delete", song_path(song.id), data: {turbo_method: :delete} %> /
+          <%= link_to "edit", edit_song_path(song.id) %>
+        </li>
       <% end %>
     <% end %>
 
-    <%= link_to "New Song", new_song_path, class: "" %>
+    
+    <% if @songs.empty? %>
+      <p>No songs yet!</p>
+    <% end %>
   </div>
 </ul>
 
 <%= form_with url: root_path, method: :get, class: "border m-3 p-3 flex flex-col" do |f| %>
     <%= f.label :input, 'What song or artist?' %>
-    <%= f.text_field :input, class: "border" %>
+    <%= f.text_field :input, class: "border my-2" %>
 
-    <%= f.submit "Search", class: "border" %>
+    <%= f.submit "Search", class: "btn btn-blue" %>
 <% end %>
 
 
@@ -34,7 +35,6 @@
   <% @result[:response][:hits].each do |hit| %>
     <li class='flex'>
       <%= hit[:result][:full_title] %>
-      <%#= image_tag(hit[:result][:header_image_thumbnail_url])  %>
 
       <%= form_with model: @song do |f| %>
           <%= f.hidden_field :image_url, value: hit[:result][:song_art_image_thumbnail_url] %>
@@ -45,7 +45,5 @@
           <%= f.submit "Add Song", class: "border p-1" %>
       <% end %>
     </li>
-
   <% end %>
-
 </ul>
