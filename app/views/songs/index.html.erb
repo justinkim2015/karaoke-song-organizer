@@ -1,20 +1,23 @@
 <%= render "shared/navbar" %>
 
-<h1 class="text-xl m-3">Hello, <%= current_user.email %>,</h1>
+<h1 class="text-xl m-3">Hello, <%= current_user.first_name %>,</h1>
 
 <ul class="m-3">
   <p>Here are your songs:</p>
   <div class="border p-1">
-    <% @songs.each do |song| %>
-      <%= turbo_frame_tag song do %>
-        <li class="my-2">
-          <b><%=link_to song.title, song_path(song.id), data: {turbo_frame: '_top'} %></b> by 
-          <b><%= song.artist %></b> --
-          <%= link_to "delete", song_path(song.id), data: {turbo_method: :delete} %> /
-          <%= link_to "edit", edit_song_path(song.id) %>
-        </li>
+    <% unless @songs.nil? %>
+      <% @songs.each do |song| %>
+        <%= turbo_frame_tag song do %>
+          <li class="my-2">
+            <b><%=link_to song.title, song_path(song.id), data: {turbo_frame: '_top'} %></b> by 
+            <b><%= song.artist %></b> --
+            <%= link_to "delete", song_path(song.id), data: {turbo_method: :delete} %> /
+            <%= link_to "edit", edit_song_path(song.id) %>
+          </li>
+        <% end %>
       <% end %>
     <% end %>
+
     <%= link_to "New Song", new_song_path, class: "" %>
   </div>
 </ul>
