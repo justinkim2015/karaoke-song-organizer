@@ -8,16 +8,15 @@
 
 <ul class='m-3 p-3'>
   <% @result[:response][:hits].each do |hit| %>
-    <li class='flex'>
-      <%= hit[:result][:full_title] %>
-
+    <li class='flex justify-between items-center my-2'>
+      <p class="text-sm"><%= hit[:result][:full_title] %></p>
       <%= form_with model: @song do |f| %>
           <%= f.hidden_field :image_url, value: hit[:result][:song_art_image_thumbnail_url] %>
           <%= f.hidden_field :lyrics_url, value: hit[:result][:url] %>
           <%= f.hidden_field :title, value: hit[:result][:title] %>
           <%= f.hidden_field :artist, value: hit[:result][:artist_names] %>
           <%= f.hidden_field :genius_id, value: hit[:result][:id] %>
-          <%= f.submit "Add Song", class: "border p-1" %>
+          <%= f.submit "Add", class: "btn-small btn-blue" %>
       <% end %>
     </li>
   <% end %>

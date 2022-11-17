@@ -7,11 +7,15 @@
     <ul>
       <% @songs.each do |song| %>
         <%= turbo_frame_tag song do %>
-          <li class="my-2">
-            <b><%=link_to song.title, song_path(song.id), data: {turbo_frame: '_top'} %></b> by
-            <b><%= song.artist %></b> --
-            <%= link_to "delete", song_path(song.id), data: {turbo_method: :delete} %> /
-            <%= link_to "edit", edit_song_path(song.id) %>
+          <li class="flex justify-between items-center my-2">
+            <p>
+              <b><%=link_to song.title, song_path(song.id), data: {turbo_frame: '_top'} %></b> by
+              <b><%= song.artist %></b>
+            </p>
+            <div class='flex justify-between items-center'>
+              <%= link_to image_tag("edit.png", class:'w-4 mx-3'), edit_song_path(song.id) %>
+              <%= link_to image_tag("x.png", class: 'w-4 mx-3'), song_path(song.id), data: {turbo_method: :delete} %> 
+            </div>
           </li>
         <% end %>
       <% end %>

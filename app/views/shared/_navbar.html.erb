@@ -1,10 +1,10 @@
-<header class="flex justify-between items-center bg-slate-300 px-3 py-6 shadow">
+<header class="flex justify-between items-center bg-gray-100 px-3 py-6 shadow">
   <h1 class="text-xl"><%= link_to "Karaoke Song Organizer", root_path %></h1>
 
   <button onclick="toggle()"><%= image_tag("hamburger.png", class:"max-h-8 ") %></button>
 </header>
 
-<div class='invisible flex justify-evenly items-center relative bg-slate-300 px-3 pb-2 -mt-7 mb-7 ease-in-out duration-150 shadow-sm' id='links'>
+<div class='invisible flex justify-evenly items-center relative bg-gray-100 px-3 pb-2 -mt-7 mb-7 ease-in-out duration-150 shadow-sm' id='links'>
   <%= link_to "Profile", edit_user_registration_path, class: "link-primary" %>
   <%= link_to "New Song", new_song_path, class: "link-primary" %>
   <%= link_to "Logout", destroy_user_session_path, data: {turbo_method: :delete}, class: "link-primary" %>
