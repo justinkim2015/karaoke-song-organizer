@@ -1,25 +1,11 @@
-<header class="flex justify-between items-center bg-slate-300 p-3">
+<header class="flex justify-between items-center bg-slate-300 px-3 py-6 shadow">
   <h1 class="text-xl"><%= link_to "Karaoke Song Organizer", root_path %></h1>
 
-  <div>
-    <button class="relative group hamburger" onclick="toggle()">
-      <div class="relative flex overflow-hidden items-center justify-center rounded-full w-[43px] h-[43px] transform transition-all bg-slate-300 ring-0 ring-gray-300 hover:ring-8 group-focus:ring-4 ring-opacity-30 duration-200">
-        <div class="flex flex-col justify-between w-[20px] h-[20px] transform transition-all duration-300 origin-center overflow-hidden">
-          <div class="bg-black h-[2px] w-7 transform transition-all duration-300 origin-left group-focus:translate-x-10"></div>
-          <div class="bg-black h-[2px] w-7 rounded transform transition-all duration-300 group-focus:translate-x-10 delay-75"></div>
-          <div class="bg-black h-[2px] w-7 transform transition-all duration-300 origin-left group-focus:translate-x-10 delay-150"></div>
-
-          <div class="absolute items-center justify-between transform transition-all duration-500 top-2.5 -translate-x-10 group-focus:translate-x-0 flex w-0 group-focus:w-12">
-            <div class="absolute bg-black h-[2px] w-5 transform transition-all duration-500 rotate-0 delay-300 group-focus:rotate-45"></div>
-            <div class="absolute bg-black h-[2px] w-5 transform transition-all duration-500 -rotate-0 delay-300 group-focus:-rotate-45"></div>
-          </div>
-        </div>
-      </div>
-    </button>
-  </div>
+  <button onclick="toggle()"><%= image_tag("hamburger.png", class:"max-h-8 ") %></button>
 </header>
 
-<div class='invisible w-0 h-0' id='links'>
-  <%= link_to "logout", destroy_user_session_path, data: {turbo_method: :delete}, class: "link-primary" %>
+<div class='invisible flex justify-evenly items-center relative bg-slate-300 px-3 pb-2 -mt-7 mb-7 ease-in-out duration-150 shadow-sm' id='links'>
+  <%= link_to "Profile", edit_user_registration_path, class: "link-primary" %>
+  <%= link_to "New Song", new_song_path, class: "link-primary" %>
+  <%= link_to "Logout", destroy_user_session_path, data: {turbo_method: :delete}, class: "link-primary" %>
 </div>
-

@@ -1,0 +1,24 @@
+<%= form_with url: root_path, method: :get, class: "box" do |f| %>
+    <%= f.label :input, 'Search by song/lyric/artist' %>
+    <%= f.text_field :input, class: "input" %>
+
+    <%= f.submit "Search", class: "btn btn-blue" %>
+<% end %>
+
+
+<ul class='m-3 p-3'>
+  <% @result[:response][:hits].each do |hit| %>
+    <li class='flex'>
+      <%= hit[:result][:full_title] %>
+
+      <%= form_with model: @song do |f| %>
+          <%= f.hidden_field :image_url, value: hit[:result][:song_art_image_thumbnail_url] %>
+          <%= f.hidden_field :lyrics_url, value: hit[:result][:url] %>
+          <%= f.hidden_field :title, value: hit[:result][:title] %>
+          <%= f.hidden_field :artist, value: hit[:result][:artist_names] %>
+          <%= f.hidden_field :genius_id, value: hit[:result][:id] %>
+          <%= f.submit "Add Song", class: "border p-1" %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

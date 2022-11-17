@@ -6,7 +6,7 @@ class SongsController < ApplicationController
     @song = current_user.songs.build
 
     search_term = params[:input]
-    response = HTTParty.get("https://api.genius.com/search?q=#{search_term}&access_token=wnzQRHMIX9sj9vKrvXbFW-1ZMwr4SkENZ7VwUcmNOxpaJjnsdN9CiWurFJbkzBMs", format: :plain)
+    response = HTTParty.get("https://api.genius.com/search?q=#{search_term}&access_token=#{ENV["GENIUS_CLIENT_TOKEN"]}", format: :plain)
     @result = JSON.parse response, symbolize_names: true
   end
 
