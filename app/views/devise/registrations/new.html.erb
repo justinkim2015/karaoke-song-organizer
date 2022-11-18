@@ -1,42 +1,42 @@
-<div class="border p-2 m-2">
-  <h2>Sign up</h2>
+<div class="box">
+  <h2 class='text-2xl mx-3'>Sign up</h2>
   
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
 
-    <div class="field">
+    <div class="field flex flex-col my-1 mx-3">
       <%= f.label :first_name %><br />
-      <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", class: 'border' %>
+      <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", class: 'input' %>
     </div>
 
-    <div class="field">
+    <div class="field flex flex-col my-1 mx-3">
       <%= f.label :last_name %><br />
-      <%= f.text_field :last_name, autocomplete: "last_name", class: 'border' %>
+      <%= f.text_field :last_name, autocomplete: "last_name", class: 'input' %>
     </div>
 
-    <div class="field">
+    <div class="field flex flex-col my-1 mx-3">
       <%= f.label :email %><br />
-      <%= f.email_field :email, autocomplete: "email", class: 'border' %>
+      <%= f.email_field :email, autocomplete: "email", class: 'input' %>
     </div>
   
-    <div class="field">
+    <div class="field flex flex-col my-1 mx-3">
       <%= f.label :password %>
       <% if @minimum_password_length %>
       <em>(<%= @minimum_password_length %> characters minimum)</em>
       <% end %><br />
-      <%= f.password_field :password, autocomplete: "new-password", class: 'border' %>
+      <%= f.password_field :password, autocomplete: "new-password", class: 'input' %>
     </div>
   
-    <div class="field">
+    <div class="field flex flex-col my-1 mx-3">
       <%= f.label :password_confirmation %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'border' %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'input' %>
     </div>
   
-    <div class="actions">
+    <div class="actions mx-3 mt-3">
       <%= f.submit "Sign up", class: 'btn btn-blue' %>
     </div>
   <% end %>
 
-  <%= render "devise/shared/links" %>
+  <div class="mx-3"><%= render "devise/shared/links" %></div>
 </div>
 
