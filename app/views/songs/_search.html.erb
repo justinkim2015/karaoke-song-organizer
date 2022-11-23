@@ -7,19 +7,19 @@
 
 
 <ul class='m-3 p-3'>
-  <% unless result.empty? %>
-    <% @result[:response][:hits].each do |hit| %>
-      <li class='flex justify-between items-center my-2'>
-        <p class="text-sm"><%= hit[:result][:full_title] %></p>
-        <%= form_with model: @song do |f| %>
-            <%= f.hidden_field :image_url, value: hit[:result][:song_art_image_thumbnail_url] %>
-            <%= f.hidden_field :lyrics_url, value: hit[:result][:url] %>
-            <%= f.hidden_field :title, value: hit[:result][:title] %>
-            <%= f.hidden_field :artist, value: hit[:result][:artist_names] %>
-            <%= f.hidden_field :genius_id, value: hit[:result][:id] %>
-            <%= f.submit "Add", class: "btn-small btn-blue" %>
-        <% end %>
-      </li>
-    <% end %>
+  <% @result[:response][:hits].each do |hit| %>
+    <li class='flex justify-between items-center my-2'>
+      <p class="text-sm"><%= link_to hit[:result][:full_title], hit[:result][:url] %></p>
+
+      <%= form_with model: @song do |f| %>
+          <%= f.hidden_field :image_url, value: hit[:result][:song_art_image_thumbnail_url] %>
+          <%= f.hidden_field :lyrics_url, value: hit[:result][:url] %>
+          <%= f.hidden_field :title, value: hit[:result][:title] %>
+          <%= f.hidden_field :artist, value: hit[:result][:artist_names] %>
+          <%= f.hidden_field :artist_url, value: hit[:result][:primary_artist][:url] %>
+          <%= f.hidden_field :genius_id, value: hit[:result][:id] %>
+          <%= f.submit "Add", class: "btn-small btn-blue" %>
+      <% end %>
+    </li>
   <% end %>
 </ul>

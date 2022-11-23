@@ -15,22 +15,13 @@ class SongsController < ApplicationController
   end
 
   def show
-    test = HTTParty.get(@song.lyrics_url)
-    html = test.body
-
-    doc = Nokogiri::HTML("<div>Hello<br>World</div>")
-    doc.css('br').each{ |br| br.replace("\n") }
-    @docs = doc.at('div')
-
-    document = Nokogiri::HTML(html)
-    spaced = document.css('br').each{ |br| br.replace("\n") }
-    @lyrics = spaced.xpath("//div[contains(@class, 'Lyrics__Container')]")
   end
 
   def create
     @song = current_user.songs.build(song_params)
 
     if @song.save
+      @song.save_lyrics
       redirect_to root_path
     else
       render :new, status: :unprocessable_entity
@@ -56,7 +47,7 @@ class SongsController < ApplicationController
   private
 
   def song_params
-    params.require(:song).permit(:artist, :title, :genius_id, :lyrics_url, :image_url)
+    params.require(:song).permit(:artist, :artist_url, :title, :genius_id, :lyrics_url, :image_url)
   end
 
   def set_song
