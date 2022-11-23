@@ -17,4 +17,19 @@ class Song < ApplicationRecord
 
     update(lyrics: lyrics.text)
   end
+
+  def sort_by_title
+    order(title: :desc)
+  end
+
+  def sort_by_artist
+    order(artist: :desc)
+  end
+
+  def sort_by_favorite
+  end
+
+  def sort_by_recent
+    order(created_at: :desc)
+  end
 end
