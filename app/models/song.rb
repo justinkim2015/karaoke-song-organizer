@@ -3,8 +3,17 @@ class Song < ApplicationRecord
 
   belongs_to :user
 
-  def self.filter(current_user)
+  def self.filter(current_user, sort = 'title')
     where(user_id: current_user.id)
+
+    case sort
+    when 'artist'
+      order(:artist)
+    when 'recent'
+      order(created_at: :desc)
+    else
+      order(:title)
+    end
   end
 
   def save_lyrics
@@ -16,20 +25,5 @@ class Song < ApplicationRecord
     lyrics = spaced.xpath("//div[contains(@class, 'Lyrics__Container')]")
 
     update(lyrics: lyrics.text)
-  end
-
-  def sort_by_title
-    order(title: :desc)
-  end
-
-  def sort_by_artist
-    order(artist: :desc)
-  end
-
-  def sort_by_favorite
-  end
-
-  def sort_by_recent
-    order(created_at: :desc)
   end
 end

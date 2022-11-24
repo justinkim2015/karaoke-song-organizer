@@ -2,7 +2,7 @@ class SongsController < ApplicationController
   before_action :set_song, only: [:destroy, :edit, :update, :show]
 
   def index
-    @songs = Song.filter(current_user)
+    @songs = Song.filter(current_user, params[:sort])
     @song = current_user.songs.build
 
     search_term = params[:input]
