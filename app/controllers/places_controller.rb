@@ -1,7 +1,14 @@
 class PlacesController < ApplicationController
+  before_action :set_place, only: [:destroy, :edit, :update, :show]
+
   def index
     @places = Place.all
-    zip_info = HTTParty.get("https://maps.googleapis.com/maps/api/geocode/json?address=168-0062&key=#{ENV["GOOGLE_MAPS_KEY"]}", format: :plain)
+    @place = Place.new
+    zip_code = params[:zip]
+
+    return if zip_code.nil?
+
+    zip_info = HTTParty.get("https://maps.googleapis.com/maps/api/geocode/json?address=#{zip_code}&key=#{ENV["GOOGLE_MAPS_KEY"]}", format: :plain)
     coordinates = JSON.parse zip_info, symbolize_names: true
     lat = coordinates[:results].first[:geometry][:location][:lat]
     long = coordinates[:results].first[:geometry][:location][:lng]
@@ -18,14 +25,9 @@ class PlacesController < ApplicationController
   end
 
   def create
-    @song = current_user.songs.build(song_params)
+    @place = current_user.places.build(place_params)
 
-    if @song.save
-      @song.save_lyrics
-      redirect_to root_path
-    else
-      render :new, status: :unprocessable_entity
-    end
+    redirect_to @place if @place.save
   end
 
   def edit
@@ -42,5 +44,15 @@ class PlacesController < ApplicationController
   def destroy
     @song.destroy
     redirect_to root_path, status: :see_other
+  end
+
+  private
+
+  def place_params
+    params.require(:place).permit(:name, :user_id, :place_id)
+  end
+
+  def set_place
+    @place = Place.find(params[:id])
   end
 end
