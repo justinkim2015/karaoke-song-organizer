@@ -7,7 +7,8 @@
 </header>
 
 <div class='invisible flex justify-evenly items-center relative bg-gray-100 px-3 pb-2 -mt-7 mb-7 ease-in-out duration-150 shadow-sm' id='links'>
+  <%= link_to "Songs", root_path, class: "link-primary" %>
+  <%= link_to "Places", places_path, class: "link-primary" %>
   <%= link_to "Profile", edit_user_registration_path, class: "link-primary" %>
-  <%= link_to "New Song", new_song_path, class: "link-primary" %>
   <%= link_to "Logout", destroy_user_session_path, data: {turbo_method: :delete}, class: "link-primary" %>
 </div>
