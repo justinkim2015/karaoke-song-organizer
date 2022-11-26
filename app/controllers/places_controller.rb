@@ -22,6 +22,11 @@ class PlacesController < ApplicationController
   end
 
   def show
+    @url = "https://www.google.com/maps/embed/v1/place?q=place_id:#{@place.place_id}&key=#{ENV["GOOGLE_MAPS_KEY"]}"
+
+    url = HTTParty.get("https://maps.googleapis.com/maps/api/place/details/json?place_id=#{@place.place_id}&fields=current_opening_hours&key=#{ENV["GOOGLE_MAPS_KEY"]}",  format: :plain)
+    store_info = JSON.parse url, symbolize_names: true
+    @status = store_info[:result][:current_opening_hours][:open_now]
   end
 
   def create
@@ -49,7 +54,7 @@ class PlacesController < ApplicationController
   private
 
   def place_params
-    params.require(:place).permit(:name, :user_id, :place_id)
+    params.require(:place).permit(:name, :user_id, :place_id, :lat, :lng)
   end
 
   def set_place
