@@ -22,11 +22,13 @@ class PlacesController < ApplicationController
   end
 
   def show
-    @url = "https://www.google.com/maps/embed/v1/place?q=place_id:#{@place.place_id}&key=#{ENV["GOOGLE_MAPS_KEY"]}"
+    @map_url = "https://www.google.com/maps/embed/v1/place?q=place_id:#{@place.place_id}&key=#{ENV["GOOGLE_MAPS_KEY"]}"
 
     url = HTTParty.get("https://maps.googleapis.com/maps/api/place/details/json?place_id=#{@place.place_id}&fields=current_opening_hours&key=#{ENV["GOOGLE_MAPS_KEY"]}",  format: :plain)
     store_info = JSON.parse url, symbolize_names: true
-    @status = store_info[:result][:current_opening_hours][:open_now]
+
+    @status = @place.open?(store_info)
+    @hours = @place.hours(store_info)
   end
 
   def create

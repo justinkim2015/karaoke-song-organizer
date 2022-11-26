@@ -8,9 +8,17 @@
     style="border:0"
     loading="lazy"
     allowfullscreen
-    src= <%= @url %>>
+    src= <%= @map_url %>>
   </iframe>
+</div>
 
-  <%= @status.to_s %>
+<div class="box">
+  <h1 class='text-xl mb-2'>Hours</h1>
+  <%= @status %>
+  <ul>
+    <% @hours.each do |day| %>
+      <li><%= day %></li>
+    <% end %>
+  </ul>
 </div>
 
