@@ -1,8 +1,10 @@
 # README
 to-do:
-  nearby karaoke(make new model: places)
   sort by tags/favorited
+
   some sort of share feature? 
-  
-  -search by several features
+
+  nearby karaoke(make new model: places)
+  search by several features(zip, nearby, name)
+    -how to find current location
 yarn build:css --watch

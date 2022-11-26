@@ -3,7 +3,7 @@
   
   <ul>
     <% current_user.places.each do |place| %>
-      <%= link_to place.name, place_path(place.id) %>
+      <li><%= link_to place.name, place_path(place.id) %></li>
     <% end %>
   </ul>
 </div>

@@ -3,9 +3,9 @@ class Place < ApplicationRecord
 
   def open?(info)
     if info[:result][:current_opening_hours][:open_now] == true
-      'Open now!'
+      'OPEN'
     else
-      'Closed'
+      'CLOSED'
     end
   end
 
