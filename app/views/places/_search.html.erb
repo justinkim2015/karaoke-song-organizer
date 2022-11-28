@@ -1,23 +1,24 @@
 <ul> 
   <%= form_with url: places_path, method: :get, class: "my-2" do |f| %>
     <%= f.label :zip, 'Search by zip code' %>
-    <%= f.text_field :zip, class: "input" %>
+    <%= f.text_field :zip, class: "input my-1" %>
 
     <%= f.submit "Search", class: "btn btn-blue" %>
   <% end %>
 
   <% unless result.nil? %>
     <% result[:results].each do |result| %>
-      <li><%= link_to result[:name], "https://www.google.com/maps/search/?api=1&query=karaoke&query_place_id=#{result[:place_id]}" %></li>
-
-      <%= form_with model: place do |f| %>
-        <%= f.hidden_field :name, value: result[:name] %>
-        <%= f.hidden_field :user_id, value: current_user.id %>
-        <%= f.hidden_field :place_id, value: result[:place_id] %>
-        <%= f.hidden_field :lat, value: result[:geometry][:location][:lat] %>
-        <%= f.hidden_field :lng, value: result[:geometry][:location][:lng] %>
-        <%= f.submit "Add", class: "btn-small btn-blue" %>
-      <% end %>
+      <div style='display: grid; grid-template-columns: 90% 10%' class='m-2'> 
+        <li><%= link_to result[:name], "https://www.google.com/maps/search/?api=1&query=karaoke&query_place_id=#{result[:place_id]}" %></li>
+        <%= form_with model: place do |f| %>
+          <%= f.hidden_field :name, value: result[:name] %>
+          <%= f.hidden_field :user_id, value: current_user.id %>
+          <%= f.hidden_field :place_id, value: result[:place_id] %>
+          <%= f.hidden_field :lat, value: result[:geometry][:location][:lat] %>
+          <%= f.hidden_field :lng, value: result[:geometry][:location][:lng] %>
+          <%= f.submit "Add", class: "btn-small btn-blue" %>
+        <% end %>
+      </div>
     <% end %>
   <% end %>
 </ul>

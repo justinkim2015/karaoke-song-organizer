@@ -1,9 +1,14 @@
+<h1 class='text-xl m-3'>Hello <%= current_user.first_name %>, </h1>
+
 <div class="box">
-  <h1>My Favorite Places</h1>
+  <h1 class='text-xl'>My Favorite Places</h1>
   
   <ul>
     <% current_user.places.each do |place| %>
-      <li><%= link_to place.name, place_path(place.id) %></li>
+      <li style='display: grid; grid-template-columns: 90% 10%'>
+        <%= link_to place.name, place_path(place.id) %> 
+        <%= link_to image_tag("x.png", class: 'w-4 mx-3'), place_path(place.id), data: {turbo_method: :delete} %> 
+      </li>
     <% end %>
   </ul>
 </div>

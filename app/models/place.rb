@@ -8,7 +8,7 @@ class Place < ApplicationRecord
       'CLOSED'
     end
   end
-
+  
   def hours(info)
     info[:result][:current_opening_hours][:weekday_text]
   end

@@ -49,8 +49,8 @@ class PlacesController < ApplicationController
   end
 
   def destroy
-    @song.destroy
-    redirect_to root_path, status: :see_other
+    @place.destroy
+    redirect_back_or_to root_path, status: :see_other
   end
 
   private
