@@ -5,11 +5,10 @@ class PlacesController < ApplicationController
     @places = Place.all
     @place = Place.new
     zip_code = params[:zip]
-    @ip = request.ip
+    # ip = request.ip
+    # @location = "https://api.ip2location.com/v2/?key=N8118CAWI4&ip=#{ip}&package=WS5&format=json&lang=en"
 
     return if zip_code.nil?
-
-    # https://api.ip2location.com/v2/?key=N8118CAWI4&ip=8.8.8.8&package=WS5&format=json&lang=en
 
     zip_info = HTTParty.get("https://maps.googleapis.com/maps/api/geocode/json?address=#{zip_code}&key=#{ENV["GOOGLE_MAPS_KEY"]}", format: :plain)
     coordinates = JSON.parse zip_info, symbolize_names: true
