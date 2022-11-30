@@ -1,22 +1,36 @@
 class PlacesController < ApplicationController
   before_action :set_place, only: [:destroy, :edit, :update, :show]
 
+  # def index
+  #   @places = Place.all
+  #   @place = Place.new
+  #   zip_code = params[:zip]
+  #   @location = current_user.location(request.ip)
+
+  #   return if zip_code.nil?
+
+  #   zip_info = HTTParty.get("https://maps.googleapis.com/maps/api/geocode/json?address=#{zip_code}&key=#{ENV["GOOGLE_MAPS_KEY"]}", format: :plain)
+  #   coordinates = JSON.parse zip_info, symbolize_names: true
+  #   lat = coordinates[:results].first[:geometry][:location][:lat]
+  #   long = coordinates[:results].first[:geometry][:location][:lng]
+
+  #   response = HTTParty.get("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=#{lat}%2C#{long}&radius=1000&keyword=karaoke&key=#{ENV["GOOGLE_MAPS_KEY"]}", format: :plain)
+  #   @result = JSON.parse response, symbolize_names: true
+  # end
+
   def index
     @places = Place.all
     @place = Place.new
-    zip_code = params[:zip]
-    # ip = request.ip
-    # @location = "https://api.ip2location.com/v2/?key=N8118CAWI4&ip=#{ip}&package=WS5&format=json&lang=en"
+    # @location = current_user.location(request.ip)
+    # lat = @location[:latitude]
+    # long = @location[:longitude]
 
-    return if zip_code.nil?
+    lat = '35.683502'
+    long = '139.657684'
 
-    zip_info = HTTParty.get("https://maps.googleapis.com/maps/api/geocode/json?address=#{zip_code}&key=#{ENV["GOOGLE_MAPS_KEY"]}", format: :plain)
-    coordinates = JSON.parse zip_info, symbolize_names: true
-    lat = coordinates[:results].first[:geometry][:location][:lat]
-    long = coordinates[:results].first[:geometry][:location][:lng]
+    @nearby = @place.nearby(lat, long)
 
-    response = HTTParty.get("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=#{lat}%2C#{long}&radius=1000&keyword=karaoke&key=#{ENV["GOOGLE_MAPS_KEY"]}", format: :plain)
-    @result = JSON.parse response, symbolize_names: true
+    @search_results = @place.search(params[:search])
   end
 
   def new
@@ -26,8 +40,7 @@ class PlacesController < ApplicationController
   def show
     @map_url = "https://www.google.com/maps/embed/v1/place?q=place_id:#{@place.place_id}&key=#{ENV["GOOGLE_MAPS_KEY"]}"
 
-    url = HTTParty.get("https://maps.googleapis.com/maps/api/place/details/json?place_id=#{@place.place_id}&fields=current_opening_hours&key=#{ENV["GOOGLE_MAPS_KEY"]}",  format: :plain)
-    store_info = JSON.parse url, symbolize_names: true
+    store_info = @place.info
 
     @status = @place.open?(store_info)
     @hours = @place.hours(store_info)

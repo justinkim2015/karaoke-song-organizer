@@ -1,7 +1,7 @@
 <ul> 
   <%= form_with url: places_path, method: :get, class: "my-2" do |f| %>
-    <%= f.label :zip, 'Search by zip code' %>
-    <%= f.text_field :zip, class: "input my-1" %>
+    <%= f.label :search, 'Search by zip code/name/address' %>
+    <%= f.text_field :search, class: "input my-1" %>
 
     <%= f.submit "Search", class: "btn btn-blue" %>
   <% end %>
@@ -14,8 +14,8 @@
           <%= f.hidden_field :name, value: result[:name] %>
           <%= f.hidden_field :user_id, value: current_user.id %>
           <%= f.hidden_field :place_id, value: result[:place_id] %>
-          <%= f.hidden_field :lat, value: result[:geometry][:location][:lat] %>
-          <%= f.hidden_field :lng, value: result[:geometry][:location][:lng] %>
+          <%= f.hidden_field :latitude, value: result[:geometry][:location][:lat] %>
+          <%= f.hidden_field :longitude, value: result[:geometry][:location][:lng] %>
           <%= f.submit "Add", class: "btn-small btn-blue" %>
         <% end %>
       </div>
