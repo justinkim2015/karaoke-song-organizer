@@ -19,6 +19,12 @@ class Place < ApplicationRecord
     info[:result][:current_opening_hours][:weekday_text]
   end
 
+  def distance_to(lat, long, place)
+    response = HTTParty.get("https://maps.googleapis.com/maps/api/directions/json?origin=#{lat},#{long}&destination=place_id:#{place}&key=#{ENV["GOOGLE_MAPS_KEY"]}", format: :plain)
+    info = JSON.parse response, symbolize_names: true
+    info[:routes][0][:legs][0][:distance][:text]
+  end
+
   def nearby(lat, long)
     response = HTTParty.get("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=#{lat}%2C#{long}&radius=1000&keyword=karaoke&key=#{ENV["GOOGLE_MAPS_KEY"]}", format: :plain)
     JSON.parse response, symbolize_names: true

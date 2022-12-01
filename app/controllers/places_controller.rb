@@ -25,10 +25,10 @@ class PlacesController < ApplicationController
     # lat = @location[:latitude]
     # long = @location[:longitude]
 
-    lat = '35.683502'
-    long = '139.657684'
+    @lat = '35.683502'
+    @long = '139.657684'
 
-    @nearby = @place.nearby(lat, long)
+    @nearby = @place.nearby(@lat, @long)
 
     @search_results = @place.search(params[:search])
   end

@@ -25,7 +25,11 @@
     <% unless @nearby.nil? %>
       <% @nearby[:results].each do |result| %>
         <div style='display: grid; grid-template-columns: 90% 10%' class='m-2'>
-          <li><%= link_to result[:name], "https://www.google.com/maps/search/?api=1&query=karaoke&query_place_id=#{result[:place_id]}" %></li>
+          <li>
+            <%= link_to result[:name], "https://www.google.com/maps/search/?api=1&query=karaoke&query_place_id=#{result[:place_id]}" %> -
+            <small><%= @place.distance_to(@lat, @long, result[:place_id]) %></small>
+          </li>
+
           <%= form_with model: @place do |f| %>
             <%= f.hidden_field :name, value: result[:name] %>
             <%= f.hidden_field :user_id, value: current_user.id %>
