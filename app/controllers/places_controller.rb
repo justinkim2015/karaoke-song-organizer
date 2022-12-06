@@ -21,12 +21,12 @@ class PlacesController < ApplicationController
   def index
     @places = Place.all
     @place = Place.new
-    # @location = current_user.location(request.ip)
-    # lat = @location[:latitude]
-    # long = @location[:longitude]
+    @location = current_user.location(request.ip)
+    @lat = @location[:latitude]
+    @long = @location[:longitude]
 
-    @lat = '35.683502'
-    @long = '139.657684'
+    # @lat = '35.683502'
+    # @long = '139.657684'
 
     @nearby = @place.nearby(@lat, @long)
 
