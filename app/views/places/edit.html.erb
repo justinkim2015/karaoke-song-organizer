@@ -1,0 +1,11 @@
+<%= turbo_frame_tag @place do %>
+  <%= form_with model: @place, class: "box flex flex-col" do |f| %>
+
+    <div class="flex justify-around">
+      <%= f.label :name, class: "" %>
+      <%= f.text_field :name, class: "input" %>
+    </div>
+    
+    <%= f.submit "Save", class: "border btn btn-blue" %>
+  <% end %>
+<% end %>

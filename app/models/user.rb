@@ -10,9 +10,3 @@ class User < ApplicationRecord
     JSON.parse location, symbolize_names: true
   end
 end
-
-lat = '35.683502'
-long = '139.657684'
-
-# "https://maps.googleapis.com/maps/api/directions/json?origin=#{lat},#{long}&destination=#{@place.place_id}&key=#{ENV["GOOGLE_MAPS_KEY"]}"
-# "https://maps.googleapis.com/maps/api/directions/json?origin=35.683502,139.657684&destination=Montreal&key=AIzaSyBOCr9bjXnuMoxIQ4cIz5XWa5kOS-16izs"

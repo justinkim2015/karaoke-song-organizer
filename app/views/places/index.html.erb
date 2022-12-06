@@ -5,10 +5,16 @@
   
   <ul>
     <% current_user.places.each do |place| %>
-      <li style='display: grid; grid-template-columns: 90% 10%'>
-        <%= link_to place.name, place_path(place.id) %> 
-        <%= link_to image_tag("x.png", class: 'w-4 mx-3'), place_path(place.id), data: {turbo_method: :delete} %> 
-      </li>
+      <%= turbo_frame_tag place do %>
+        <li style='display: grid; grid-template-columns: 80% 20%'>
+          <%= link_to place.name, place_path(place.id) %> 
+
+          <div class="flex justify-end items-center">
+            <%= link_to image_tag("edit.png", class:'w-4 mx-3'), edit_place_path(place.id) %>
+            <%= link_to image_tag("x.png", class: 'w-4 mx-3'), place_path(place.id), data: {turbo_method: :delete} %>
+          </div>
+        </li>
+      <% end %>
     <% end %>
   </ul>
 </div>

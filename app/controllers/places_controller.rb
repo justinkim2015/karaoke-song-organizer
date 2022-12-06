@@ -56,8 +56,8 @@ class PlacesController < ApplicationController
   end
 
   def update
-    if @song.update(song_params)
-      redirect_to root_path
+    if @place.update(place_params)
+      redirect_back_or_to root_path
     else
       render :edit, status: :unprocessable_entity
     end
