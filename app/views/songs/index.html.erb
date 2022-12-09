@@ -1,6 +1,4 @@
-<% unless current_user.nil? %>
-  <h1 class="text-xl m-3">Hello <%= current_user.first_name %>,</h1>
-<% end %>
+<%= render 'shared/greeting', current_user: current_user %>
 
   <div class="box">
     <p>Songs:</p>
@@ -35,7 +33,7 @@
           <p>No songs yet!</p>
         <% end %>
       <% else %>
-        <p><%= link_to 'Login', new_user_session_path %> to save songs!</p>
+        <p><%= link_to 'Log in', new_user_session_path %> to save songs!</p>
       <% end %>
     </ul>
   </div>
