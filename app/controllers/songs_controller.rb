@@ -2,12 +2,14 @@ class SongsController < ApplicationController
   before_action :set_song, only: [:destroy, :edit, :update, :show]
 
   def index
-    @songs = Song.filter(current_user, params[:sort])
-    @song = current_user.songs.build
-
     search_term = params[:input]
     response = HTTParty.get("https://api.genius.com/search?q=#{search_term}&access_token=#{ENV["GENIUS_CLIENT_TOKEN"]}", format: :plain)
     @result = JSON.parse response, symbolize_names: true
+
+    return if current_user.nil?
+
+    @songs = Song.filter(current_user, params[:sort])
+    @song = current_user.songs.build
   end
 
   def new
