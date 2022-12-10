@@ -1,0 +1,20 @@
+<h1 class='text-xl'>My Favorite Places</h1>
+
+<ul>
+  <% if current_user.nil? %>
+    <p><%= link_to 'Log in', new_user_session_path %> to save places!</p>
+  <% else %>
+    <% current_user.places.each do |place| %>
+      <%= turbo_frame_tag place do %>
+        <li style='display: grid; grid-template-columns: 80% 20%'>
+          <%= link_to place.name, place_path(place.id), data: {turbo_frame: '_top'} %> 
+
+          <div class="flex justify-end items-center">
+            <%= link_to image_tag("edit.png", class:'w-4 mx-3'), edit_place_path(place.id) %>
+            <%= link_to image_tag("x.png", class: 'w-4 mx-3'), place_path(place.id), data: {turbo_method: :delete} %>
+          </div>
+        </li>
+      <% end %>
+    <% end %>
+  <% end %>
+</ul>

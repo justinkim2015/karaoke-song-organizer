@@ -11,27 +11,7 @@
       </small>
       
       <% if defined?(@songs) %>
-        <% @songs.each do |song| %>
-          <%= turbo_frame_tag song do %>
-            <li style='display: grid; grid-template-columns: 80% 20%' class="my-2">
-            
-              <p>
-                <b><%=link_to song.title, song_path(song.id), data: {turbo_frame: '_top'} %></b> by
-                <b><%= link_to song.artist, song.artist_url, data: {turbo_frame: '_top'} %></b>
-              </p>
-
-              <div class='flex justify-end items-center'>
-                <%= link_to image_tag("edit.png", class:'w-4 mx-3'), edit_song_path(song.id) %>
-                <%= link_to image_tag("x.png", class: 'w-4 mx-3'), song_path(song.id), data: {turbo_method: :delete} %> 
-              </div>
-
-            </li>
-          <% end %>
-        <% end %>
-
-        <% if @songs.empty? %>
-          <p>No songs yet!</p>
-        <% end %>
+        <%= render 'songlist', {songs: @songs} %>
       <% else %>
         <p><%= link_to 'Log in', new_user_session_path %> to save songs!</p>
       <% end %>

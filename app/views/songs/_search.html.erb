@@ -9,7 +9,7 @@
 <ul class='m-3 p-3'>
   <% @result[:response][:hits].each do |hit| %>
     <li class='flex justify-between items-center my-3'>
-      <p class="text-sm"><%= link_to hit[:result][:full_title], hit[:result][:url] %></p>
+      <small><%= link_to hit[:result][:full_title], hit[:result][:url] %></small>
 
       <%= form_with model: @song do |f| %>
           <%= f.hidden_field :image_url, value: hit[:result][:song_art_image_thumbnail_url] %>

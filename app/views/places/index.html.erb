@@ -1,28 +1,7 @@
 <%= render 'shared/greeting', current_user: current_user %>
 
 <div class="box">
-  <h1 class='text-xl'>My Favorite Places</h1>
-  
-  <ul>
-  
-  <% if current_user.nil? %>
-    <p><%= link_to 'Log in', new_user_session_path %> to save places!</p>
-  <% else %>
-    <% current_user.places.each do |place| %>
-      <%= turbo_frame_tag place do %>
-        <li style='display: grid; grid-template-columns: 80% 20%'>
-          <%= link_to place.name, place_path(place.id) %> 
-
-          <div class="flex justify-end items-center">
-            <%= link_to image_tag("edit.png", class:'w-4 mx-3'), edit_place_path(place.id) %>
-            <%= link_to image_tag("x.png", class: 'w-4 mx-3'), place_path(place.id), data: {turbo_method: :delete} %>
-          </div>
-        </li>
-      <% end %>
-    <% end %>
-  <% end %>
-  
-  </ul>
+  <%= render 'placelist' %>
 </div>
 
 <div class="box">
@@ -30,32 +9,5 @@
 </div>
 
 <div class="box">
-  <h1 class="m-2 text-xl">Nearby:</h1>
-  <ul>
-    <% unless @nearby.nil? %>
-      <% @nearby[:results].each do |result| %>
-        <div style='display: grid; grid-template-columns: 80% 20%' class='my-3 ml-1 flex justify-between items-center'>
-          <li>
-            <small><%= link_to result[:name], "https://www.google.com/maps/search/?api=1&query=karaoke&query_place_id=#{result[:place_id]}" %> -</small>
-            <small><%= @place.distance_to(@lat, @long, result[:place_id]) %></small>
-          </li>
-
-          <%= form_with model: @place do |f| %>
-            <%= f.hidden_field :name, value: result[:name] %>
-            <%= f.hidden_field :place_id, value: result[:place_id] %>
-            <%= f.hidden_field :latitude, value: result[:geometry][:location][:lat] %>
-            <%= f.hidden_field :longitude, value: result[:geometry][:location][:lng] %>
-            
-            <% if current_user.nil? %>
-              <%= link_to 'Log in', new_user_session_path, class: 'btn-small btn-blue' %>
-            <% else %>
-              <%= f.hidden_field :user_id, value: current_user.id %>
-              <%= f.submit "Add", class: "btn-small btn-blue" %>
-            <% end %>
-          <% end %>
-
-        </div>
-      <% end %>
-    <% end %>
-  </ul>
+  <%= render 'nearby', {nearby: @nearby, lat: @lat, long: @long, place: @place } %>
 </div>
