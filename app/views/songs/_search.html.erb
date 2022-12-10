@@ -20,7 +20,7 @@
           <%= f.hidden_field :genius_id, value: hit[:result][:id] %>
           
           <% if @song.nil? %>
-            <%= link_to 'Log in to save', new_user_session_path, class: 'btn-small btn-blue' %>
+            <%= link_to 'Log in', new_user_session_path, class: 'btn-small btn-blue' %>
           <% else %>
             <%= f.submit "Add", class: "btn-small btn-blue" %>
           <% end %>
