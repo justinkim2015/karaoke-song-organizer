@@ -8,11 +8,11 @@ This application allows the user to organize a playlist of your favorite karaoke
 - Ruby on Rails
 - Tailwind
 - PostgreSQL
-- Dokku/DigitalOcean
 - Minitest
 - Javascript
 - CSS
 - HTML
+- Dokku/DigitalOcean
 
 ## Live Previews
 
