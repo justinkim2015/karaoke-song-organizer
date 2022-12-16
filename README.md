@@ -2,7 +2,11 @@
 ###### Live: http://www.karaoke.justins-portfolio.live
 
 ## Description
-This application allows the user to organize a playlist of your favorite karaoke songs.  Additionally, you can search and save karaoke stores either by nearby places or an address or name.  
+This application allows the user to search thousands of songs via the Genius API to organize a playlist for your next karaoke night.  It automatically looks up the lyrics for your songs and saves them to a postgreSQL database for easy access in the future.  
+
+Additionally, users are able to search and save karaoke stores either by nearby places or an address or name incase you find a great deal or amazing room setups.  After saving a location the app will use several Google APIs to provide a map to the store and its hours of operation.
+
+The organization of the site was fairly simple, but the biggest difficulty I encountered when making this project was gathering the necessary informatio, especially lyric information.  It was difficult to find a free or cheaply priced API which provided full lyrics for the large number of songs I wanted to support.  In the end I used the HTTParty gem along with webscraping in order to download the lyrics from Genius.com.
 
 ## Technologies Used
 - Ruby on Rails
@@ -32,4 +36,4 @@ In this project I used several APIs and webscraping in order to get the song inf
 - Google Places API
 - Genius API
 - IP2Location API
-- HTTParty(Webscraping for lyric information)
+- HTTParty
