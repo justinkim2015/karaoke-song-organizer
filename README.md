@@ -6,7 +6,7 @@ This application allows the user to search thousands of songs via the Genius API
 
 Additionally, users are able to search and save karaoke stores either by nearby places or an address or name incase you find a great deal or amazing room setups.  After saving a location the app will use several Google APIs to provide a map to the store and its hours of operation.
 
-The organization of the site was fairly simple, but the biggest difficulty I encountered when making this project was gathering the necessary informatio, especially lyric information.  It was difficult to find a free or cheaply priced API which provided full lyrics for the large number of songs I wanted to support.  In the end I used the HTTParty gem along with webscraping in order to download the lyrics from Genius.com.
+The organization of the site was fairly straightforward, but the biggest difficulty I encountered when making this project was gathering the necessary information, especially lyric information.  It was difficult to find a free or cheaply priced API which provided full lyrics for the large number of songs I wanted to support.  In the end I used the HTTParty gem along with webscraping in order to get the lyrics from Genius.com.
 
 ## Technologies Used
 - Ruby on Rails
