@@ -1,5 +1,5 @@
 # Karaoke Song Organizer
-###### Live: http://www.karaoke.justins-portfolio.live
+###### Live: http://www.karaoke.justins-portfolio.live (mobile only)
 
 ## Description
 This application allows the user to search thousands of songs via the Genius API to organize a playlist for your next karaoke night.  It automatically looks up the lyrics for your songs and saves them to a postgreSQL database for easy access in the future.  
