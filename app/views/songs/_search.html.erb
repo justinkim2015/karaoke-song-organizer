@@ -6,7 +6,6 @@
 <% end %>
 
 <ul class='m-3 p-3 md:overflow-auto md:h-2/5'>
-  <h1 class="text-xl md:center"><b>Songs</b></h1>
   <% @result[:response][:hits].each do |hit| %>
     <li class='flex justify-between items-center my-3'>
       <small><%= link_to hit[:result][:full_title], hit[:result][:url] %></small>
