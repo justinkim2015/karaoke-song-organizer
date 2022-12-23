@@ -1,17 +1,17 @@
-<header class="flex justify-between items-center bg-gray-100 px-3 py-6 shadow">
-  <h1 class="text-2xl"><%= link_to "Karaoke Song Organizer", root_path %></h1>
+<header class="flex justify-between items-center bg-gray-100 px-4 py-6 shadow">
+  <h1 class="text-2xl md:text-3xl"><%= link_to "Karaoke Song Organizer", root_path %></h1>
 
   <button onclick="toggle()"><%= image_tag("hamburger.png", class:"max-h-8 md:hidden") %></button>
 
   <div class="hidden md:block">
-    <%= link_to "Songs", root_path, class: "link-primary mx-3" %>
-    <%= link_to "Places", places_path, class: "link-primary mx-3" %>
+    <%= link_to "Songs", root_path, class: "link-primary mx-3 md:text-xl" %>
+    <%= link_to "Places", places_path, class: "link-primary mx-3 md:text-xl" %>
 
     <% if user_signed_in? %>
-      <%= link_to "Profile", edit_user_registration_path, class: "link-primary mx-3" %>
-      <%= link_to "Logout", destroy_user_session_path, data: {turbo_method: :delete}, class: "link-primary mx-3" %>
+      <%= link_to "Profile", edit_user_registration_path, class: "link-primary mx-3 md:text-xl" %>
+      <%= link_to "Logout", destroy_user_session_path, data: {turbo_method: :delete}, class: "link-primary mx-3 md:text-xl" %>
     <% else %>
-      <%= link_to "Log in", new_user_session_path, class: "link-primary mx-3" %>
+      <%= link_to "Log in", new_user_session_path, class: "link-primary mx-3 md:text-xl" %>
     <% end %>
   </div>
 </header>
