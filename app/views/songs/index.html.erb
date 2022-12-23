@@ -1,9 +1,8 @@
-
 <div class="md:center">  
   <%= render 'shared/greeting', current_user: current_user %>
   <div class="box">
-    <p>Songs:</p>
-    <ul>
+    <h1 class="text-xl">Songs:</h1>
+    <ul class="">
       <small>
         Sort by:
         <%= link_to 'Artist', root_path(sort: 'artist') %> •

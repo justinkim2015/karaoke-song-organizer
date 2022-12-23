@@ -10,10 +10,10 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body class='h-screen'>
     <%= render "shared/navbar" %>
 
-    <%= yield %>
+   <div class='h-5/6 flex flex-col justify-center'><%= yield %></div>
 
     <script>
       function toggle() {

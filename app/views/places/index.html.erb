@@ -1,13 +1,15 @@
-<%= render 'shared/greeting', current_user: current_user %>
-
-<div class="box">
-  <%= render 'placelist' %>
-</div>
-
-<div class="box">
-  <%= render "search", {result: @search_results, place: @place} %>
-</div>
-
-<div class="box">
-  <%= render 'nearby', {nearby: @nearby, lat: @lat, long: @long, place: @place } %>
+<div class="md:center">
+  <%= render 'shared/greeting', current_user: current_user %>
+  
+  <div class="box">
+    <%= render 'placelist' %>
+  </div>
+  
+  <div class="box">
+    <%= render "search", {result: @search_results, place: @place} %>
+  </div>
+  
+  <div class="box">
+    <%= render 'nearby', {nearby: @nearby, lat: @lat, long: @long, place: @place } %>
+  </div>
 </div>

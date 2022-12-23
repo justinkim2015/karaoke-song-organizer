@@ -1,6 +1,6 @@
 <%= form_with url: root_path, method: :get, class: "box" do |f| %>
-    <%= f.label :input, 'Search by song/lyric/artist' %>
-    <%= f.text_field :input, class: "input" %>
+    <%= f.label :input, 'Search by song, lyric or artist' %>
+    <%= f.text_field :input, class: "input my-2" %>
 
     <%= f.submit "Search", class: "btn btn-blue" %>
 <% end %>
