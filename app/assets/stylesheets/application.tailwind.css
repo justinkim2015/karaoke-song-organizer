@@ -28,10 +28,14 @@
   }
 
   .box {
-    @apply border shadow-sm p-3 m-3 bg-gray-100 rounded;
+    @apply border shadow-sm p-3 m-3 bg-gray-100 rounded md:w-1/2 md:center;
   }
 
   .input {
     @apply py-2 border;
+  }
+
+  .center {
+    @apply flex-col flex justify-center items-center;
   }
 }
