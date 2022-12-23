@@ -7,9 +7,14 @@
   
   <div class="box">
     <%= render "search", {result: @search_results, place: @place} %>
+    <button class="hidden md:block btn btn-blue" onclick="toggleModal()">Show Nearby</button>
   </div>
   
-  <div class="box">
+  <div class="box md:hidden">
+    <%= render 'nearby', {nearby: @nearby, lat: @lat, long: @long, place: @place } %>
+  </div>
+
+  <div class="modal hidden fixed z-50 w-full h-110 bg-opacity-5 bg-black flex-col justify-center items-center" onclick="toggleModal()">
     <%= render 'nearby', {nearby: @nearby, lat: @lat, long: @long, place: @place } %>
   </div>
 </div>

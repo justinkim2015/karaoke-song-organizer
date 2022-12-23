@@ -39,3 +39,7 @@
     @apply flex-col flex justify-center items-center;
   }
 }
+
+.h-110 {
+  height: 110vh;
+}
