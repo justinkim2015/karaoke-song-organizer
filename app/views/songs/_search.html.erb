@@ -2,10 +2,11 @@
     <%= f.label :input, 'Search by song, lyric or artist' %>
     <%= f.text_field :input, class: "input my-2" %>
 
-    <%= f.submit "Search", class: "btn btn-blue" %>
+    <%= f.submit "Search", class: "btn btn-blue"%>
 <% end %>
 
-<ul class='m-3 p-3'>
+<ul class='m-3 p-3 md:overflow-auto md:h-2/5'>
+  <h1 class="text-xl md:center"><b>Songs</b></h1>
   <% @result[:response][:hits].each do |hit| %>
     <li class='flex justify-between items-center my-3'>
       <small><%= link_to hit[:result][:full_title], hit[:result][:url] %></small>
@@ -17,7 +18,7 @@
           <%= f.hidden_field :artist, value: hit[:result][:artist_names] %>
           <%= f.hidden_field :artist_url, value: hit[:result][:primary_artist][:url] %>
           <%= f.hidden_field :genius_id, value: hit[:result][:id] %>
-          
+
           <% if @song.nil? %>
             <%= link_to 'Log in', new_user_session_path, class: 'btn-small btn-blue' %>
           <% else %>
