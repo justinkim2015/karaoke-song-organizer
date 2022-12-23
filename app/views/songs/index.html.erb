@@ -1,21 +1,21 @@
 <%= render 'shared/greeting', current_user: current_user %>
 
-  <div class="box">
-    <p>Songs:</p>
-    <ul>
-      <small>
-        Sort by: 
-        <%= link_to 'Artist', root_path(sort: 'artist') %> •
-        <%= link_to 'Recent', root_path(sort: 'recent') %> •
-        <%= link_to 'Title', root_path(sort: 'title') %>
-      </small>
-      
-      <% if defined?(@songs) %>
-        <%= render 'songlist', {songs: @songs} %>
-      <% else %>
-        <p><%= link_to 'Log in', new_user_session_path %> to save songs!</p>
-      <% end %>
-    </ul>
-  </div>
+<div class="box">
+  <p>Songs:</p>
+  <ul>
+    <small>
+      Sort by: 
+      <%= link_to 'Artist', root_path(sort: 'artist') %> •
+      <%= link_to 'Recent', root_path(sort: 'recent') %> •
+      <%= link_to 'Title', root_path(sort: 'title') %>
+    </small>
+    
+    <% if defined?(@songs) %>
+      <%= render 'songlist', {songs: @songs} %>
+    <% else %>
+      <p><%= link_to 'Log in', new_user_session_path %> to save songs!</p>
+    <% end %>
+  </ul>
+</div>
 
 <%= render 'search', result: @result %>
