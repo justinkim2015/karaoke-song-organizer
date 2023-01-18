@@ -30,11 +30,13 @@ class Place < ApplicationRecord
     JSON.parse response, symbolize_names: true
   end
 
-  def search(search)
-    return if search.nil?
+  def search(query)
+    search = HTTParty.get("https://maps.googleapis.com/maps/api/geocode/json?address=#{query}&key=#{ENV["GOOGLE_MAPS_KEY"]}", format: :plain)
 
-    search = HTTParty.get("https://maps.googleapis.com/maps/api/geocode/json?address=#{search}&key=#{ENV["GOOGLE_MAPS_KEY"]}", format: :plain)
     coordinates = JSON.parse search, symbolize_names: true
+    
+    return if coordinates[:results].first.nil?
+
     lat = coordinates[:results].first[:geometry][:location][:lat]
     long = coordinates[:results].first[:geometry][:location][:lng]
 
