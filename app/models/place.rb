@@ -34,7 +34,7 @@ class Place < ApplicationRecord
     search = HTTParty.get("https://maps.googleapis.com/maps/api/geocode/json?address=#{query}&key=#{ENV["GOOGLE_MAPS_KEY"]}", format: :plain)
 
     coordinates = JSON.parse search, symbolize_names: true
-    
+
     return if coordinates[:results].first.nil?
 
     lat = coordinates[:results].first[:geometry][:location][:lat]
