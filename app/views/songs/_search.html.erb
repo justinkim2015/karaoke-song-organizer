@@ -5,25 +5,28 @@
     <%= f.submit "Search", class: "btn btn-blue"%>
 <% end %>
 
-<ul class='m-3 p-3 md:overflow-auto md:h-2/5'>
-  <% @result[:response][:hits].each do |hit| %>
-    <li class='flex justify-between items-center my-3'>
-      <small><%= link_to hit[:result][:full_title], hit[:result][:url] %></small>
 
-      <%= form_with model: @song do |f| %>
-          <%= f.hidden_field :image_url, value: hit[:result][:song_art_image_thumbnail_url] %>
-          <%= f.hidden_field :lyrics_url, value: hit[:result][:url] %>
-          <%= f.hidden_field :title, value: hit[:result][:title] %>
-          <%= f.hidden_field :artist, value: hit[:result][:artist_names] %>
-          <%= f.hidden_field :artist_url, value: hit[:result][:primary_artist][:url] %>
-          <%= f.hidden_field :genius_id, value: hit[:result][:id] %>
+<% unless @result.nil? %>
+  <ul class='m-3 p-3 md:overflow-auto md:h-2/5'>
+    <% @result[:response][:hits].each do |hit| %>
+      <li class='flex justify-between items-center my-3'>
+        <small><%= link_to hit[:result][:full_title], hit[:result][:url] %></small>
 
-          <% if @song.nil? %>
-            <%= link_to 'Log in', new_user_session_path, class: 'btn-small btn-blue' %>
-          <% else %>
-            <%= f.submit "Add", class: "btn-small btn-blue" %>
-          <% end %>
-      <% end %>
-    </li>
-  <% end %>
-</ul>
+        <%= form_with model: @song do |f| %>
+            <%= f.hidden_field :image_url, value: hit[:result][:song_art_image_thumbnail_url] %>
+            <%= f.hidden_field :lyrics_url, value: hit[:result][:url] %>
+            <%= f.hidden_field :title, value: hit[:result][:title] %>
+            <%= f.hidden_field :artist, value: hit[:result][:artist_names] %>
+            <%= f.hidden_field :artist_url, value: hit[:result][:primary_artist][:url] %>
+            <%= f.hidden_field :genius_id, value: hit[:result][:id] %>
+
+            <% if @song.nil? %>
+              <%= link_to 'Log in', new_user_session_path, class: 'btn-small btn-blue' %>
+            <% else %>
+              <%= f.submit "Add", class: "btn-small btn-blue" %>
+            <% end %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
